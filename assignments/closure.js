@@ -1,8 +1,25 @@
+console.log("******************************THIS IS THE MVP OUTPUT OF CLOSURE.JS**********");
+
 // ==== Challenge 1: Write your own closure ====
 // Write a closure of your own creation.
 // Keep it simple! Remember a closure is just a function
 // that manipulates variables defined in the outer scope.
 // The outer scope can be a parent function, or the top level of the script.
+function outer() {
+  let myVariable = 10;
+
+  function inner() {
+    myVariable=myVariable+5;
+  }
+
+  console.log(`Inside the outer function and the value of myVariable is ${myVariable} before calling the inner function`)
+
+  inner(); //call the inner function
+
+  console.log(`Inside the outer function and the value of myVariable is ${myVariable} after calling the inner function`)
+
+}
+outer(); //call the outer function
 
 
 /* STRETCH PROBLEMS, Do not attempt until you have completed all previous tasks for today's project files */
@@ -21,9 +38,13 @@ const counterMaker = () => {
 // myCounter(); // 1
 // myCounter(); // 2
 
+
 // ==== Challenge 3: Make `counterMaker` more sophisticated ====
 // It should have a `limit` parameter. Any counters we make with `counterMaker`
 // will refuse to go over the limit, and start back at 1.
+
+
+
 
 // ==== Challenge 4: Create a counter function with an object that can increment and decrement ====
 const counterFactory = () => {

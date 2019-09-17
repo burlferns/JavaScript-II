@@ -38,29 +38,76 @@ const items = ['Pencil', 'Notebook', 'yo-yo', 'Gum'];
   console.log(test2); // "this Pencil is worth a million dollars!"
 */
 
+console.log("******************************THIS IS THE MVP OUTPUT OF CALLBACKS.JS**********");
 
+//********************* First problem
 function getLength(arr, cb) {
   // getLength passes the length of the array into the callback.
+  return cb(arr.length); 
 }
 
+const test_getLength = getLength(items, (len) => {
+  return `The length of the items array is ${len}`;
+});
+
+console.log(test_getLength);
+
+//********************* Second problem
 function last(arr, cb) {
   // last passes the last item of the array into the callback.
+  let indexLast=arr.length-1;
+  return cb(arr[indexLast]); 
 }
 
+const test_last = last(items, (elem) => { 
+  return `The last item in the items array is ${elem}`;
+});
+
+console.log(test_last);
+
+//********************* Third problem
 function sumNums(x, y, cb) {
   // sumNums adds two numbers (x, y) and passes the result to the callback.
+  let addResult = x+y;
+  return cb(addResult);
 }
 
+const test_sumNums = sumNums(3,4, (num) => `The result of the sum of 3 & 4 is ${num}`);
+
+console.log(test_sumNums);
+
+//********************* Fourth problem
 function multiplyNums(x, y, cb) {
   // multiplyNums multiplies two numbers and passes the result to the callback.
+  let multResult = x*y;
+  return cb(multResult);
 }
 
+const test_multiplyNums = multiplyNums(7,2, (num) => `The result of the multiplication of 7 & 2 is ${num}`);
+
+console.log(test_multiplyNums);
+
+//********************* Fifth problem
 function contains(item, list, cb) {
   // contains checks if an item is present inside of the given array/list.
   // Pass true to the callback if it is, otherwise pass false.
+  let isPresent=false;
+  for(let i=0;i<list.length;i++) {
+    if(list[i]===item) {
+      isPresent=true;
+    }
+  }
+  return cb(isPresent);  
 }
 
-/* STRETCH PROBLEM */
+const testTrue_contains = contains('Notebook', items, (result)=>`Notebook is in the items array: ${result}`); 
+console.log(testTrue_contains);
+const testFalse_contains = contains('Ball', items, (result)=>`Ball is in the items array: ${result}`); 
+console.log(testFalse_contains);
+
+
+
+//********************* STRETCH PROBLEM 
 
 function removeDuplicates(array, cb) {
   // removeDuplicates removes all duplicate values from the given array.

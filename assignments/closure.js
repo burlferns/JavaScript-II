@@ -24,6 +24,7 @@ outer(); //call the outer function
 
 /* STRETCH PROBLEMS, Do not attempt until you have completed all previous tasks for today's project files */
 
+console.log("******************************THIS IS THE STRETCH OUTPUT OF CLOSURE.JS**********");
 
 // ==== Challenge 2: Implement a "counter maker" function ====
 const counterMaker = () => {
@@ -33,16 +34,41 @@ const counterMaker = () => {
   //      NOTE: This `counter` function, being nested inside `counterMaker`,
   //      "closes over" the `count` variable. It can "see" it in the parent scope!
   // 3- Return the `counter` function.
+  let count=0;
+  function counter() {
+    count=count+1;
+    return count;
+  }
+  return counter;
 };
 // Example usage: const myCounter = counterMaker();
 // myCounter(); // 1
 // myCounter(); // 2
+const myCounter = counterMaker();
+console.log(`First run of myCounter() gives a result of ${myCounter()}`); // 1
+console.log(`Second run of myCounter() gives a result of ${myCounter()}`); // 2
+console.log(`Third run of myCounter() gives a result of ${myCounter()}`);
 
 
 // ==== Challenge 3: Make `counterMaker` more sophisticated ====
 // It should have a `limit` parameter. Any counters we make with `counterMaker`
 // will refuse to go over the limit, and start back at 1.
-
+const counterMaker_limit = () => {
+  let count=0;
+  const limit=4;
+  function counter() {
+    count=count+1;
+    if(count===limit) {
+      count=1;
+    }
+    return count;
+  }
+  return counter;
+};
+const myCounter_limit = counterMaker_limit();
+for(let i=0;i<8;i++) {
+  console.log(`Run number:${i+1},  Output of myCounter_limit() is:${myCounter_limit()}`); 
+}
 
 
 
@@ -51,4 +77,20 @@ const counterFactory = () => {
   // Return an object that has two methods called `increment` and `decrement`.
   // `increment` should increment a counter variable in closure scope and return it.
   // `decrement` should decrement the counter variable and return it.
+  let count=0;
+
+  let myInsideObject = {
+    increment: () => ++count,
+    decrement: () => --count
+  };
+
+  return myInsideObject;
 };
+
+const myObj = counterFactory();
+for(let i=0;i<5;i++) {
+  console.log(`Run number:${i+1},  Output of myObj.increment() is:${myObj.increment()}`); 
+}
+for(let i=0;i<3;i++) {
+  console.log(`Run number:${i+1},  Output of myObj.decrement() is:${myObj.decrement()}`); 
+}

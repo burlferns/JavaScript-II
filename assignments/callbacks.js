@@ -109,8 +109,32 @@ console.log(testFalse_contains);
 
 //********************* STRETCH PROBLEM 
 
+console.log("******************************THIS IS THE STRETCH OUTPUT OF CALLBACKS.JS**********");
+
 function removeDuplicates(array, cb) {
   // removeDuplicates removes all duplicate values from the given array.
   // Pass the duplicate free array to the callback function.
   // Do not mutate the original array.
+
+  let noDuplicates = array.slice(); //Clone the original array
+
+  //Go through the array and make duplicates equal the empty string
+  for(let i=0;i<=noDuplicates.length-2;i++) {
+    for(let j=i+1;j<=noDuplicates.length-1;j++) {
+      if(noDuplicates[i]===noDuplicates[j]) {
+        noDuplicates[j]="";
+      }
+    }
+  }
+
+  //Remove the empty string from the array
+  noDuplicates = noDuplicates.filter(item => item!=="");
+  
+  return cb(noDuplicates);
 }
+
+const arrWithDuplicates = ['Pencil', 'Notebook', 'yo-yo', 'Gum', 'Pencil', 'Ball', 'Pen', 'Eraser', 'yo-yo'];
+console.log(`The array with duplicates is: ${arrWithDuplicates}`);
+
+const test_noDups = removeDuplicates(arrWithDuplicates, (ary) => `The array with duplicates removed is: ${ary}`);
+console.log(test_noDups);
